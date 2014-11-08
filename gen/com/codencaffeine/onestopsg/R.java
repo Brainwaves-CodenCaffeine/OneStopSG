@@ -1088,14 +1088,15 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f050023;
         public static final int action_bar_title=0x7f050022;
         public static final int action_context_bar=0x7f05001d;
-        public static final int action_forgot_password=0x7f050044;
+        public static final int action_forgot_password=0x7f050047;
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050045;
+        public static final int action_settings=0x7f050048;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
+        public static final int button2=0x7f050046;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int container=0x7f050043;
@@ -1103,6 +1104,8 @@ containing a value of this type.
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
+        public static final int editText1=0x7f050044;
+        public static final int editText2=0x7f050045;
         public static final int edit_query=0x7f050030;
         public static final int email=0x7f05003f;
         public static final int end=0x7f050013;
@@ -1202,13 +1205,16 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
         public static final int activity_login=0x7f030018;
-        public static final int activity_splash_screen=0x7f030019;
-        public static final int fragment_splash_screen=0x7f03001a;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
+        public static final int activity_login_activity1=0x7f030019;
+        public static final int activity_splash_screen=0x7f03001a;
+        public static final int fragment_login_activity1=0x7f03001b;
+        public static final int fragment_splash_screen=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
     }
     public static final class menu {
         public static final int login=0x7f0c0000;
-        public static final int splash_screen=0x7f0c0001;
+        public static final int login_activity1=0x7f0c0001;
+        public static final int splash_screen=0x7f0c0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1251,22 +1257,23 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_forgot_password=0x7f0a0015;
+        public static final int action_forgot_password=0x7f0a0016;
         public static final int action_settings=0x7f0a000f;
-        public static final int action_sign_in_register=0x7f0a0013;
-        public static final int action_sign_in_short=0x7f0a0014;
+        public static final int action_sign_in_register=0x7f0a0014;
+        public static final int action_sign_in_short=0x7f0a0015;
         public static final int app_name=0x7f0a000d;
-        public static final int error_field_required=0x7f0a001a;
-        public static final int error_incorrect_password=0x7f0a0019;
-        public static final int error_invalid_email=0x7f0a0017;
-        public static final int error_invalid_password=0x7f0a0018;
+        public static final int error_field_required=0x7f0a001b;
+        public static final int error_incorrect_password=0x7f0a001a;
+        public static final int error_invalid_email=0x7f0a0018;
+        public static final int error_invalid_password=0x7f0a0019;
         public static final int hello_world=0x7f0a000e;
-        public static final int login_progress_signing_in=0x7f0a0016;
+        public static final int login_progress_signing_in=0x7f0a0017;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f0a0011;
-        public static final int prompt_password=0x7f0a0012;
-        public static final int title_activity_login=0x7f0a0010;
+        public static final int prompt_email=0x7f0a0012;
+        public static final int prompt_password=0x7f0a0013;
+        public static final int title_activity_login=0x7f0a0011;
+        public static final int title_activity_login_activity1=0x7f0a0010;
     }
     public static final class style {
         /** 

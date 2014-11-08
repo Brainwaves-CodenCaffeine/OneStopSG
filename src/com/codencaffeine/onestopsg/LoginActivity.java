@@ -1,5 +1,19 @@
 package com.codencaffeine.onestopsg;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -7,6 +21,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -14,6 +29,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -53,11 +69,17 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
-
+		
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
 		mEmailView = (EditText) findViewById(R.id.email);
 		mEmailView.setText(mEmail);
+		
+		
+		
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
@@ -125,7 +147,7 @@ public class LoginActivity extends Activity {
 			cancel = true;
 		}
 
-		// Check for a valid email address.
+		/*Check for a valid email address.
 		if (TextUtils.isEmpty(mEmail)) {
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
@@ -134,7 +156,7 @@ public class LoginActivity extends Activity {
 			mEmailView.setError(getString(R.string.error_invalid_email));
 			focusView = mEmailView;
 			cancel = true;
-		}
+		}*/
 
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
@@ -201,7 +223,7 @@ public class LoginActivity extends Activity {
 			// TODO: attempt authentication against a network service.
 
 			try {
-				// Simulate network access.
+				doPost(mEmailView.getText().toString(), mPasswordView.getText().toString());
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				return false;
@@ -239,4 +261,46 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 		}
 	}
+	
+	private void doPost(final String sUserName, final String sPassword) { Thread t = new Thread() { public void run() {
+        // By creating a HttpClient object, Android is
+        // now web service client sending data to a HTTP server.
+        HttpClient client = new DefaultHttpClient();
+
+        // Set up parameters 
+        HttpConnectionParams.setConnectionTimeout(client.getParams(),
+                10000); // Timeout Limit
+
+        // Set up and JSON object & gives the POST message the
+        // "entity" (data) in the form of a string to send to the server. 
+        HttpResponse response;
+        JSONObject json = new JSONObject();
+        String URL = "http://desilva.net46.net/login.php";
+        try {
+            HttpPost post = new HttpPost(URL);
+            json.put("username", sUserName);
+            json.put("password", sPassword);
+            StringEntity se = new StringEntity("JSON: "
+                    + json.toString());
+            se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
+                    "application/json"));
+            post.setEntity(se);
+            //System.out.println(json.toString());
+
+            // Execute (send) POST message to target server. 
+            response = client.execute(post);
+            //Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG);
+            if(response!=null)
+            {
+                InputStream in = response.getEntity().getContent(); //Get the data in the entity
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+};
+t.start();  
+}
+
 }

@@ -26,7 +26,7 @@ public class SplashScreen extends ActionBarActivity {
 		new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                Intent mainIntent = new Intent(SplashScreen.this,LoginActivity.class);
+                Intent mainIntent = new Intent(SplashScreen.this,LoginActivity1.class);
                 SplashScreen.this.startActivity(mainIntent);
                 Toast.makeText(getApplicationContext(), "Control Transfered", Toast.LENGTH_LONG).show();
                 SplashScreen.this.finish();
