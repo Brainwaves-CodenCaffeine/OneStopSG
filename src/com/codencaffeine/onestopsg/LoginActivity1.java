@@ -176,7 +176,7 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
 	    result = sb.toString();
 	    if (result.startsWith("1")){
 	    	
-	    	Intent newintent = new Intent(LoginActivity1.this,SplashScreen.class);
+	    	Intent newintent = new Intent(LoginActivity1.this,NewsFeed.class);
 	    	startActivity(newintent);
 	    	
 	    }

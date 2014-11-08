@@ -33,6 +33,14 @@
             android:name="com.codencaffeine.onestopsg.LoginActivity1"
             android:label="@string/title_activity_login_activity1" >
         </activity>
+        <activity
+            android:name="com.codencaffeine.onestopsg.NewsFeed"
+            android:label="@string/title_activity_news_feed" >
+        </activity>
+        <activity
+            android:name="com.codencaffeine.onestopsg.ExpandableListAdapter"
+            android:label="@string/title_activity_expandable_list_adapter" >
+        </activity>
     </application>
 
 </manifest>
