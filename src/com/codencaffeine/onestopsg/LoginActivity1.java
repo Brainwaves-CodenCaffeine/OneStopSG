@@ -1,7 +1,10 @@
 package com.codencaffeine.onestopsg;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -13,17 +16,17 @@ import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Build;
@@ -32,6 +35,9 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
 	
 	EditText username;
 	EditText password;
+	StringBuilder out;
+	String line;
+	String result;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
 				// TODO Auto-generated method stub
 				Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
 				doPost(username.getText().toString(), password.getText().toString());
+				
 			
 				
 			}
@@ -104,6 +111,7 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
 	private void doPost(final String sUserName, final String sPassword) { Thread t = new Thread() { public void run() {
         // By creating a HttpClient object, Android is
         // now web service client sending data to a HTTP server.
+        
         HttpClient client = new DefaultHttpClient();
 
         // Set up parameters 
@@ -124,22 +132,73 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
             se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
                     "application/json"));
             post.setEntity(se);
+            //Toast.makeText(getApplicationContext(), json.toString(), Toast.LENGTH_LONG).show();
             //System.out.println(json.toString());
 
             // Execute (send) POST message to target server. 
             response = client.execute(post);
-            Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
             if(response!=null)
             {
                 InputStream in = response.getEntity().getContent(); //Get the data in the entity
-
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                out = new StringBuilder();
+                
+                line = reader.readLine();
+                /*while ((line = reader.readLine()) != null) {
+                    out.append(line);
+                	//Toast.makeText(getApplicationContext(), out.toString(), Toast.LENGTH_LONG).show();
+                }*/
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+   
+	
+	try {
+		HttpClient client1 = new DefaultHttpClient();
+		 HttpPost post = new HttpPost("http://desilva.net46.net/login.php");
+	    HttpResponse response1 = client1.execute(post);           
+	    HttpEntity entity = response1.getEntity();
+
+	    InputStream inputStream = entity.getContent();
+	    // json is UTF-8 by default
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+	    StringBuilder sb = new StringBuilder();
+	    String line;
+
+	    while ((line = reader.readLine()) != null){
+	    	sb.append(line + "\n");
+	    }
+	    inputStream.close();
+	    
+	    result = sb.toString();
+	    if (result.startsWith("1")){
+	    	
+	    	Intent newintent = new Intent(LoginActivity1.this,SplashScreen.class);
+	    	startActivity(newintent);
+	    	
+	    }
+	    else {
+	    	Log.e("djsfklja","dfjkajdsf;");
+
+	    }
+	    
+	} catch (Exception e) { 
+	    Toast.makeText(getApplicationContext(), "Data Not Available", Toast.LENGTH_LONG).show();
+	    e.printStackTrace();
+	}
+	
+	}
 };
 t.start();  
+Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+
+	
+
+
+
 }
 
 	@Override
