@@ -9,16 +9,25 @@ import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -45,22 +54,67 @@ public class NewsFeed extends Activity {
         StrictMode.setThreadPolicy(policy);
         
         content01 = (TextView)findViewById(R.id.textView1);
-        content01.setText("Loading Data...");
- 
-        // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
- 
-        // preparing list data
+        expListView = (ExpandableListView)findViewById(R.id.lvExp);
+        //listAdapter = (ExpandableListAdapter) findViewById(R.id.container);
+        
         prepareListData();
- 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
- 
+        
+
         // setting list adapter
         expListView.setAdapter(listAdapter);
-        
         getContentPhp();
     }
  
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.news_feed, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		if(item.getItemId() == R.id.profile){
+			Intent newintent = new Intent (NewsFeed.this, EmpProfile.class);
+			startActivity(newintent);
+		}
+		
+		if(item.getItemId() == R.id.events){
+			Intent newintent = new Intent (NewsFeed.this, Events.class);
+			startActivity(newintent);
+		
+		}
+		
+		if(item.getItemId() == R.id.training){
+			Intent newintent = new Intent (NewsFeed.this, Training.class);
+			startActivity(newintent);
+		
+		}
+		
+		if(item.getItemId() == R.id.survey){
+			Intent newintent = new Intent (NewsFeed.this, Survey.class);
+			startActivity(newintent);
+		
+		}
+		
+		if(item.getItemId() == R.id.complaints){
+			Intent newintent = new Intent (NewsFeed.this, EmpProfile.class);
+			startActivity(newintent);
+		
+		}
+		
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
     /*
      * Preparing the list data
      */
@@ -104,7 +158,7 @@ public class NewsFeed extends Activity {
     }
     
     public void getContentPhp() {
-		DefaultHttpClient   httpclient = new DefaultHttpClient(new BasicHttpParams());
+		DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
 		HttpPost httppost = new HttpPost("http://desilva.net46.net/newsfeed.php");
 		
 		httppost.setHeader("Content-type", "application/json");

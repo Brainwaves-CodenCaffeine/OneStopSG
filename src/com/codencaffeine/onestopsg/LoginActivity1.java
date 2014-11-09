@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -30,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Build;
+import android.provider.ContactsContract.Profile;
 
 public class LoginActivity1 extends ActionBarActivity implements OnClickListener {
 	
@@ -65,10 +67,7 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
 			}
 		});
 
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+		
 	}
 
 	@Override
@@ -99,13 +98,7 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
 		public PlaceholderFragment() {
 		}
 
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_login_activity1,
-					container, false);
-			return rootView;
-		}
+		
 	}
 	
 	private void doPost(final String sUserName, final String sPassword) { Thread t = new Thread() { public void run() {
@@ -122,16 +115,12 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
         // "entity" (data) in the form of a string to send to the server. 
         HttpResponse response;
         JSONObject json = new JSONObject();
-        String URL = "http://desilva.net46.net/login.php";
+        String URL = "http://desilva.net46.net/login.php?username="+sUserName+"&password="+sPassword;
         try {
-            HttpPost post = new HttpPost(URL);
-            json.put("username", sUserName);
-            json.put("password", sPassword);
-            StringEntity se = new StringEntity("JSON: "
-                    + json.toString());
-            se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,
-                    "application/json"));
-            post.setEntity(se);
+            HttpGet post = new HttpGet(URL);
+            response=client.execute(post);
+            HttpEntity ey=response.getEntity();
+            
             //Toast.makeText(getApplicationContext(), json.toString(), Toast.LENGTH_LONG).show();
             //System.out.println(json.toString());
 
@@ -143,7 +132,7 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
                 InputStream in = response.getEntity().getContent(); //Get the data in the entity
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 out = new StringBuilder();
-                
+               
                 line = reader.readLine();
                 /*while ((line = reader.readLine()) != null) {
                     out.append(line);
@@ -158,7 +147,7 @@ public class LoginActivity1 extends ActionBarActivity implements OnClickListener
 	
 	try {
 		HttpClient client1 = new DefaultHttpClient();
-		 HttpPost post = new HttpPost("http://desilva.net46.net/login.php");
+		 HttpPost post = new HttpPost("http://desilva.net46.net/login.php?username="+sUserName+"&password="+sPassword);
 	    HttpResponse response1 = client1.execute(post);           
 	    HttpEntity entity = response1.getEntity();
 

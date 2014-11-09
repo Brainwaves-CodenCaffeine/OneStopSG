@@ -8,5 +8,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
+    <item android:id="@+id/profile" android:title="Profile"></item>
+    <item android:id="@+id/events" android:title="Events"></item>
+    <item android:id="@+id/training" android:title="Training"></item>
+    <item android:id="@+id/survey" android:title="Survey"></item>
+    <item android:id="@+id/complaints" android:title="Complaints"></item>
 
 </menu>

@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.codencaffeine.onestopsg.SplashScreen"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Base.AppCompat.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +41,22 @@
         <activity
             android:name="com.codencaffeine.onestopsg.ExpandableListAdapter"
             android:label="@string/title_activity_expandable_list_adapter" >
+        </activity>
+        <activity
+            android:name="com.codencaffeine.onestopsg.EmpProfile"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.codencaffeine.onestopsg.Events"
+            android:label="@string/title_activity_events" >
+        </activity>
+        <activity
+            android:name="com.codencaffeine.onestopsg.Training"
+            android:label="@string/title_activity_training" >
+        </activity>
+        <activity
+            android:name="com.codencaffeine.onestopsg.Survey"
+            android:label="@string/title_activity_survey" >
         </activity>
     </application>
 
