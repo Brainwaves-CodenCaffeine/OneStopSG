@@ -11,5 +11,6 @@
     <string name="title_activity_events">Events</string>
     <string name="title_activity_training">Training</string>
     <string name="title_activity_survey">Survey</string>
+    <string name="title_activity_survey1">Survey1</string>
 
 </resources>

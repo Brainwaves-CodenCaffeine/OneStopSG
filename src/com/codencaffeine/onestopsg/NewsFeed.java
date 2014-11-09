@@ -97,7 +97,7 @@ public class NewsFeed extends Activity {
 		}
 		
 		if(item.getItemId() == R.id.survey){
-			Intent newintent = new Intent (NewsFeed.this, Survey.class);
+			Intent newintent = new Intent (NewsFeed.this, Survey1.class);
 			startActivity(newintent);
 		
 		}
@@ -203,10 +203,10 @@ public class NewsFeed extends Activity {
 			
 		for (int i=0; i < n; i++) {
 			JSONObject jo = reader1.getJSONObject(i);
-			content01.append(jo.getString("news_name")+ "\t");
-			content01.append(jo.getString("news_desc")+ "\t");
+			content01.append(jo.getString("news_name")+ "\n");
+			content01.append(jo.getString("news_desc")+ "\n");
 			
-			content01.append("\n");			
+			content01.append("\n\n");			
 		}
 		} catch(Exception e){
 			e.printStackTrace();

@@ -58,6 +58,10 @@
             android:name="com.codencaffeine.onestopsg.Survey"
             android:label="@string/title_activity_survey" >
         </activity>
+        <activity
+            android:name="com.codencaffeine.onestopsg.Survey1"
+            android:label="@string/title_activity_survey1" >
+        </activity>
     </application>
 
 </manifest>
